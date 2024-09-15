@@ -1,4 +1,6 @@
-﻿using Gm.Infrastructure.Telegram;
+﻿using Gm.Infrastructure.TelegramBot;
+using Gm.Infrastructure.TelegramBot.Abstract;
+using Gm.Infrastructure.TelegramBot.Core;
 using Infrastructure.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,6 +25,8 @@ public static class TelegramBotExtensions
 
                 return new TelegramBotClient(botOptions, httpClient);
             });
+
+        services.AddScoped<ISenderService, SenderService>();
 
         services.AddHostedService<SchedulerService>();
     }

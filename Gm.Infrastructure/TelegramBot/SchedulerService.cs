@@ -1,10 +1,11 @@
-﻿using Microsoft.Extensions.Hosting; 
+﻿using Gm.Infrastructure.TelegramBot.Abstract;
+using Microsoft.Extensions.Hosting;
 
-namespace Gm.Infrastructure.Telegram;
+namespace Gm.Infrastructure.TelegramBot;
 
-public class SchedulerService : BackgroundService
+public class SchedulerService(ISenderService senderService) : BackgroundService
 {
-    private readonly TimeSpan _targetTime = new(8, 0, 0); // Set the target time for sending the message (e.g., 8:00 AM)
+    private TimeSpan _targetTime = new(23, 37, 0); // Set the target time for sending the message (e.g., 8:00 AM)
     
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
@@ -23,16 +24,16 @@ public class SchedulerService : BackgroundService
                 var now = DateTime.Now;
                 var timeUntilTarget = _targetTime > now.TimeOfDay 
                     ? _targetTime - now.TimeOfDay 
-                    : _targetTime.Add(new TimeSpan(24, 0, 0)) - now.TimeOfDay;
+                    : _targetTime.Add(new TimeSpan(0, 1, 0)) - now.TimeOfDay;
             
                 await Task.Delay(timeUntilTarget, token);
 
                 if (!token.IsCancellationRequested)
                 {
-                    //await botClient.SendTextMessageAsync(chatId, "Good morning!");
-                    await Task.Delay(TimeSpan.FromDays(1), token); // Wait for 1 day
+                    await senderService.SendAsync(token);
+                    _targetTime = _targetTime.Add(TimeSpan.FromMinutes(1));
+                    await Task.Delay(TimeSpan.FromMinutes(1), token); // Wait for 1 day
                 }
-                //await receiverService.ReceiveAsync(token);
             }
             catch (Exception e)
             {
