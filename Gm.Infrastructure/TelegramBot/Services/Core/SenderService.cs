@@ -1,7 +1,7 @@
 using Gm.Infrastructure.TelegramBot.Abstract;
 using Telegram.Bot;
 
-namespace Gm.Infrastructure.TelegramBot.Core;
+namespace Gm.Infrastructure.TelegramBot.Services.Core;
 
 public class SenderService : ISenderService
 {

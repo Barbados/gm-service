@@ -1,11 +1,11 @@
 ﻿using Gm.Infrastructure.TelegramBot.Abstract;
 using Microsoft.Extensions.Hosting;
 
-namespace Gm.Infrastructure.TelegramBot;
+namespace Gm.Infrastructure.TelegramBot.Services.Scheduler;
 
-public class SchedulerService(ISenderService senderService) : BackgroundService
+public class SchedulerService(ISenderService senderService, IReceiverService receiverService) : BackgroundService
 {
-    private TimeSpan _targetTime = new(23, 37, 0); // Set the target time for sending the message (e.g., 8:00 AM)
+    private TimeSpan _targetTime = new(19, 03, 0); // Set the target time for sending the message (e.g., 8:00 AM)
     
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
@@ -21,6 +21,8 @@ public class SchedulerService(ISenderService senderService) : BackgroundService
         {
             try
             {
+                await receiverService.ReceiveAsync(token);
+                
                 var now = DateTime.Now;
                 var timeUntilTarget = _targetTime > now.TimeOfDay 
                     ? _targetTime - now.TimeOfDay 

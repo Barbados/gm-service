@@ -1,10 +1,13 @@
 ﻿using Gm.Infrastructure.TelegramBot;
 using Gm.Infrastructure.TelegramBot.Abstract;
-using Gm.Infrastructure.TelegramBot.Core;
+using Gm.Infrastructure.TelegramBot.Services.Command;
+using Gm.Infrastructure.TelegramBot.Services.Core;
+using Gm.Infrastructure.TelegramBot.Services.Scheduler;
 using Infrastructure.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Telegram.Bot;
+using Telegram.Bot.Polling;
 
 namespace Gm.Infrastructure.Configuration.DependencyInjection;
 
@@ -27,6 +30,9 @@ public static class TelegramBotExtensions
             });
 
         services.AddScoped<ISenderService, SenderService>();
+        services.AddScoped<IUpdateHandler, UpdateHandler>();
+        services.AddScoped<IReceiverService, ReceiverService>();
+        services.AddScoped<IBotCommandService, BotCommandService>();
 
         services.AddHostedService<SchedulerService>();
     }
