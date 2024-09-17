@@ -6,6 +6,7 @@ var services = builder.Services;
 var configuration = builder.Configuration;
 
 services.ConfigureTelegramBot(configuration);
+services.ConfigureScheduler(configuration);
 
 var host = builder.Build();
 
