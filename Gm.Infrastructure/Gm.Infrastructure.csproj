@@ -9,9 +9,14 @@
     <ItemGroup>
       <PackageReference Include="Ardalis.SharedKernel" Version="1.6.0" />
       <PackageReference Include="Ardalis.SmartEnum" Version="8.0.0" />
+      <PackageReference Include="Ardalis.SmartEnum.EFCore" Version="8.0.0" />
       <PackageReference Include="Ardalis.Specification.EntityFrameworkCore" Version="8.0.0" />
       <PackageReference Include="EFCore.NamingConventions" Version="8.0.3" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
       <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
       <PackageReference Include="Quartz" Version="3.13.0" />
@@ -21,7 +26,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Data\Configuration\" />
       <Folder Include="Data\Migrations\" />
     </ItemGroup>
 
@@ -29,6 +33,10 @@
       <None Update="appsettings.db-migration.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Gm.Domain\Gm.Domain.csproj" />
     </ItemGroup>
 
 </Project>
