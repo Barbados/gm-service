@@ -1,5 +1,5 @@
-﻿using Gm.Domain.Aggregates.SubscriptionAggregate;
-using Gm.Domain.Aggregates.TgChatAggregate;
+﻿using Gm.Domain.Aggregates.SubscriberAggregate;
+using Gm.Domain.Aggregates.SubscriptionAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

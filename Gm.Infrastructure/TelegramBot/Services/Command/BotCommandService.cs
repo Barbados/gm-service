@@ -1,5 +1,8 @@
-﻿using Gm.Infrastructure.TelegramBot.Abstract;
+﻿using Gm.Application.Commands.Subscribers;
+using Gm.Domain.Aggregates.SubscriptionAggregate;
+using Gm.Infrastructure.TelegramBot.Abstract;
 using Gm.Infrastructure.TelegramBot.Model;
+using MediatR;
 using Microsoft.Extensions.Logging;
 using Telegram.Bot;
 using Telegram.Bot.Types;
@@ -10,6 +13,7 @@ namespace Gm.Infrastructure.TelegramBot.Services.Command;
 
 public class BotCommandService(
     ITelegramBotClient botClient,
+    IMediator mediator,
     ILogger<BotCommandService> logger) : IBotCommandService
 {
     public async Task HandleAsync(Message message)
@@ -42,8 +46,10 @@ public class BotCommandService(
 
     private async Task<Message> Subscribe(Message message)
     {
-        const string msg = $"Congratulations! You've just subscribed for getting GM messages daily.";
+        await mediator.Send(new CreateSubscriberCommand(message.Chat.Id, SubscriptionTopic.GoodMorning));
 
+        const string msg = $"Congratulations! You've just subscribed for getting GM messages daily.";
+        
         return await botClient.SendTextMessageAsync(message.Chat.Id, msg);
     }
     
