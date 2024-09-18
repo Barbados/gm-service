@@ -11,8 +11,4 @@
       <PackageReference Include="Ardalis.SmartEnum" Version="8.0.0" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Aggregates\SubscriberAggregate\Specifications\" />
-    </ItemGroup>
-
 </Project>

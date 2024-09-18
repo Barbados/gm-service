@@ -1,4 +1,4 @@
-﻿using Gm.Application.Commands.Subscribers;
+﻿using Gm.Application.Subscribers.Commands;
 using Gm.Domain.Aggregates.SubscriptionAggregate;
 using Gm.Infrastructure.TelegramBot.Abstract;
 using Gm.Infrastructure.TelegramBot.Model;
