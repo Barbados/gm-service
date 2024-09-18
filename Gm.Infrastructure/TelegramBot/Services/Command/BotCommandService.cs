@@ -26,7 +26,8 @@ public class BotCommandService(
             var sentMessage = await (commandType.Name switch
             {
                 nameof(BotCommandType.Start) => StartConversation(message),
-                nameof(BotCommandType.Register) => SendText(message),
+                nameof(BotCommandType.Subscribe) => Subscribe(message),
+                nameof(BotCommandType.Unsubscribe) => Unsubscribe(message),
                 _ => Usage(message)
             });
             logger.LogInformation($"The message was sent with id: {sentMessage.MessageId}");
@@ -35,13 +36,22 @@ public class BotCommandService(
 
     private async Task<Message> StartConversation(Message message)
     {
-        var replyMarkup = new ReplyKeyboardMarkup(true)
-            .AddButtons("Loose weight", "Gain weight", "Other");
-
         return await botClient.SendTextMessageAsync(message.Chat.Id,
-            $"Hello Dear {message.From!.Username}! Welcome to Donny bot! Please let me know how I can help." +
-            $"\n\nSelect from the options or just text:",
-            replyMarkup: replyMarkup);
+            $"Hello Dear {message.From!.Username}! Welcome to GM bot!");
+    }
+
+    private async Task<Message> Subscribe(Message message)
+    {
+        const string msg = $"Congratulations! You've just subscribed for getting GM messages daily.";
+
+        return await botClient.SendTextMessageAsync(message.Chat.Id, msg);
+    }
+    
+    private async Task<Message> Unsubscribe(Message message)
+    {
+        const string msg = $"Unfortunately, you've just unsubscribed from getting GM messages. We wish you come back soon!";
+
+        return await botClient.SendTextMessageAsync(message.Chat.Id, msg);
     }
 
     private async Task<Message> Usage(Message msg)

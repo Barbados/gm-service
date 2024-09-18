@@ -13,6 +13,16 @@ public abstract class BotCommandHelper
             {
                 Command = BotCommandType.Start,
                 Description = "to start conversation"
+            },
+            new()
+            {
+                Command = BotCommandType.Subscribe,
+                Description = "to subscribe on getting GM"
+            },
+            new()
+            {
+                Command = BotCommandType.Unsubscribe,
+                Description = "to unsubscribe from getting GM"
             }
         };
     }
