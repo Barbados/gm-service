@@ -3,7 +3,7 @@ using Gm.Domain.Aggregates.SubscriberAggregate;
 using Gm.Domain.Aggregates.SubscriptionAggregate;
 using Gm.Domain.Aggregates.SubscriptionAggregate.Specifications;
 
-namespace Gm.Application.Subscribers.Queries;
+namespace Gm.Application.UseCases.Subscribers.Queries;
 
 public class GetSubscribersByTopicQueryHandler(IRepository<Subscription> repository) : IQueryHandler<GetSubscribersByTopicQuery, List<Subscriber>>
 {

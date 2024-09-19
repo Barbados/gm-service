@@ -4,7 +4,7 @@ using Gm.Domain.Aggregates.SubscriberAggregate.Specifications;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace Gm.Application.Subscribers.Commands;
+namespace Gm.Application.UseCases.Subscribers.Commands;
 
 public class CreateSubscriberCommandHandler(IRepository<Subscriber> repository,
     ILogger<CreateSubscriberCommandHandler> logger) : IRequestHandler<CreateSubscriberCommand>
