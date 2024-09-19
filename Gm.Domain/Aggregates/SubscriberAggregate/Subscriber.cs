@@ -6,7 +6,7 @@ namespace Gm.Domain.Aggregates.SubscriberAggregate;
 
 public class Subscriber : EntityBase, IAggregateRoot
 {
-    public long TgChatId { get; set; }
+    public long TgChatId { get; init; }
 
     private readonly List<Subscription> _subscriptions = new();
     public IEnumerable<Subscription> Subscriptions => _subscriptions.AsReadOnly();
