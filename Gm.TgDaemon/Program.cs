@@ -5,8 +5,10 @@ var builder = Host.CreateApplicationBuilder();
 var services = builder.Services;
 var configuration = builder.Configuration;
 
+services.ConfigureDatabase(configuration);
+services.ConfigureMediatr();
 services.ConfigureTelegramBot(configuration);
-//services.ConfigureScheduler(configuration);
+services.ConfigureScheduler(configuration);
 
 var host = builder.Build();
 
