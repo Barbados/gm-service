@@ -23,6 +23,11 @@ public abstract class BotCommandHelper
             {
                 Command = BotCommandType.Unsubscribe,
                 Description = "to unsubscribe from getting GM"
+            },
+            new()
+            {
+                Command = BotCommandType.Test,
+                Description = "to test getting GM message"
             }
         };
     }

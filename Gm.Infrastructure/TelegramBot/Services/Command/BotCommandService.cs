@@ -12,6 +12,7 @@ using Telegram.Bot.Types.ReplyMarkups;
 namespace Gm.Infrastructure.TelegramBot.Services.Command;
 
 public class BotCommandService(
+    ISenderService senderService,
     ITelegramBotClient botClient,
     IMediator mediator,
     ILogger<BotCommandService> logger) : IBotCommandService
@@ -32,6 +33,7 @@ public class BotCommandService(
                 nameof(BotCommandType.Start) => StartConversation(message),
                 nameof(BotCommandType.Subscribe) => Subscribe(message),
                 nameof(BotCommandType.Unsubscribe) => Unsubscribe(message),
+                nameof(BotCommandType.Test) => Test(message),
                 _ => Usage(message)
             });
             logger.LogInformation($"The message was sent with id: {sentMessage.MessageId}");
@@ -58,6 +60,11 @@ public class BotCommandService(
         const string msg = $"Unfortunately, you've just unsubscribed from getting GM messages. We wish you come back soon!";
 
         return await botClient.SendTextMessageAsync(message.Chat.Id, msg);
+    }
+
+    private async Task<Message> Test(Message message)
+    {
+        return await senderService.SendAsync(message.Chat.Id, SubscriptionTopic.GoodMorning, default);
     }
 
     private async Task<Message> Usage(Message msg)

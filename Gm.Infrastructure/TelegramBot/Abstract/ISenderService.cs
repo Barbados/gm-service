@@ -1,8 +1,9 @@
 using Gm.Domain.Aggregates.SubscriptionAggregate;
+using Telegram.Bot.Types;
 
 namespace Gm.Infrastructure.TelegramBot.Abstract;
 
 public interface ISenderService
 {
-    Task SendAsync(long chatId, SubscriptionTopic topic, CancellationToken token);
+    Task<Message> SendAsync(long chatId, SubscriptionTopic topic, CancellationToken token);
 }

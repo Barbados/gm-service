@@ -1,18 +1,28 @@
 using Gm.Domain.Aggregates.SubscriptionAggregate;
 using Gm.Infrastructure.TelegramBot.Abstract;
 using Telegram.Bot;
+using Telegram.Bot.Types;
 
 namespace Gm.Infrastructure.TelegramBot.Services.Core;
 
 public class SenderService(ITelegramBotClient botClient) : ISenderService
 {
-    public async Task SendAsync(long chatId, SubscriptionTopic topic, CancellationToken token)
+    public async Task<Message> SendAsync(long chatId, SubscriptionTopic topic, CancellationToken token)
     {
-        switch (topic.Name)
+        var sentMessage = await (topic.Name switch
         {
-            case nameof(SubscriptionTopic.GoodMorning):
-                await botClient.SendTextMessageAsync(chatId, "Good Night!", cancellationToken: token);
-                break;
-        }
+            nameof(SubscriptionTopic.GoodMorning) => botClient.SendTextMessageAsync(chatId, ComposeGmMessage(), cancellationToken: token),
+            _ => throw new ArgumentOutOfRangeException()
+        });
+
+        return sentMessage;
+    }
+
+    private static string ComposeGmMessage()
+    {
+        var message = $"Hello!\nToday is {DateTime.Today:dddd}, {DateTime.Today:dd-MM-yyyy}.";
+        message += $"\nHave a nice day! See you tomorrow.";
+
+        return message;
     }
 }
