@@ -22,7 +22,7 @@ public class BotCommandService(
         if (message.Text is not { } messageText)
             return;
 
-        var command = messageText.Split(' ')[0];
+        var command = ExtractCommand(messageText);
         BotCommandType.TryFromValue(command, out var commandType);
         var chatId = message.Chat.Id;
         // Handle command selected
@@ -38,6 +38,14 @@ public class BotCommandService(
             });
             logger.LogInformation($"The message was sent with id: {sentMessage.MessageId}");
         }
+    }
+
+    private string ExtractCommand(string messageText)
+    {
+        var isSentInGroupChat = messageText.Contains($"@gmmebot"); // todo: move to appsettings.json or get name in runtime
+        messageText = messageText.Split(isSentInGroupChat ? '@' : ' ')[0];
+        
+        return messageText;
     }
 
     private async Task<Message> StartConversation(Message message)
