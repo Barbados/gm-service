@@ -6,7 +6,7 @@ namespace Gm.Domain.Aggregates.SubscriptionAggregate;
 
 public class Subscription : EntityBase, IAggregateRoot
 {
-    public Guid SubscriptionId { get; init; }
+    public Guid SubscriberId { get; init; }
     
     public Subscriber? Subscriber { get; init; }
     

@@ -18,4 +18,12 @@ public class Subscriber : EntityBase, IAggregateRoot
             Topic = topic
         });
     }
+
+    public void Unsubscribe(SubscriptionTopic topic)
+    {
+        foreach (var subscription in _subscriptions.Where(s => s.Topic == topic))
+        {
+            subscription.Deactivate();
+        }
+    }
 }

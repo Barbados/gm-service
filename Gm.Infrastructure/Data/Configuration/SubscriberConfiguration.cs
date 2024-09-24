@@ -13,7 +13,7 @@ public class SubscriberConfiguration : IEntityTypeConfiguration<Subscriber>
 
         builder.HasMany(s => s.Subscriptions)
             .WithOne(subs => subs.Subscriber)
-            .HasForeignKey(s => s.SubscriptionId);
+            .HasForeignKey(s => s.SubscriberId);
     }
 }
 

@@ -1,4 +1,6 @@
 ﻿using Gm.Application.UseCases.Subscribers.Commands;
+using Gm.Application.UseCases.Subscribers.Queries;
+using Gm.Application.UseCases.Subscriptions.Commands;
 using Gm.Domain.Aggregates.SubscriptionAggregate;
 using Gm.Infrastructure.TelegramBot.Abstract;
 using Gm.Infrastructure.TelegramBot.Model;
@@ -56,15 +58,19 @@ public class BotCommandService(
 
     private async Task<Message> Subscribe(Message message)
     {
-        await mediator.Send(new CreateSubscriberCommand(message.Chat.Id, SubscriptionTopic.GoodMorning));
-
-        const string msg = $"Congratulations! You've just subscribed for getting GM messages daily.";
+        var msg = $"Congratulations! You've just subscribed for getting GM messages daily.";
+        var existingSubscriber = await mediator.Send(new GetSubscriberByChatIdCommand(message.Chat.Id));
+        if (existingSubscriber is not null)
+            msg = "Good news, you are already subscribed.";
+        else
+            await mediator.Send(new CreateSubscriberCommand(message.Chat.Id, SubscriptionTopic.GoodMorning));
         
         return await botClient.SendTextMessageAsync(message.Chat.Id, msg);
     }
     
     private async Task<Message> Unsubscribe(Message message)
     {
+        await mediator.Send(new DeactivateSubscriptionCommand(message.Chat.Id, SubscriptionTopic.GoodMorning));
         const string msg = $"Unfortunately, you've just unsubscribed from getting GM messages. We wish you come back soon!";
 
         return await botClient.SendTextMessageAsync(message.Chat.Id, msg);
