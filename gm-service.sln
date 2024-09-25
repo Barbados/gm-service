@@ -1,12 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gm.TgDaemon", "Gm.TgDaemon\Gm.TgDaemon.csproj", "{E34BAA89-3858-485A-BCFF-5EA0E024B157}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gm.TgDaemon", "src\Gm.TgDaemon\Gm.TgDaemon.csproj", "{E34BAA89-3858-485A-BCFF-5EA0E024B157}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gm.Application", "Gm.Application\Gm.Application.csproj", "{687F5969-AAF6-42EE-8A77-BE3885F8FFF5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gm.Application", "src\Gm.Application\Gm.Application.csproj", "{687F5969-AAF6-42EE-8A77-BE3885F8FFF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gm.Domain", "Gm.Domain\Gm.Domain.csproj", "{9EDFC0F1-A496-4F6A-91DF-F39A47B2CE42}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gm.Domain", "src\Gm.Domain\Gm.Domain.csproj", "{9EDFC0F1-A496-4F6A-91DF-F39A47B2CE42}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gm.Infrastructure", "Gm.Infrastructure\Gm.Infrastructure.csproj", "{0044CB9E-AEF3-441E-9501-4E5CA24EFC21}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gm.Infrastructure", "src\Gm.Infrastructure\Gm.Infrastructure.csproj", "{0044CB9E-AEF3-441E-9501-4E5CA24EFC21}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{161F9BFE-94B7-40C6-823D-7285FABADAF4}"
+	ProjectSection(SolutionItems) = preProject
+		compose.yaml = compose.yaml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +35,11 @@ Global
 		{0044CB9E-AEF3-441E-9501-4E5CA24EFC21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0044CB9E-AEF3-441E-9501-4E5CA24EFC21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0044CB9E-AEF3-441E-9501-4E5CA24EFC21}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{687F5969-AAF6-42EE-8A77-BE3885F8FFF5} = {161F9BFE-94B7-40C6-823D-7285FABADAF4}
+		{9EDFC0F1-A496-4F6A-91DF-F39A47B2CE42} = {161F9BFE-94B7-40C6-823D-7285FABADAF4}
+		{0044CB9E-AEF3-441E-9501-4E5CA24EFC21} = {161F9BFE-94B7-40C6-823D-7285FABADAF4}
+		{E34BAA89-3858-485A-BCFF-5EA0E024B157} = {161F9BFE-94B7-40C6-823D-7285FABADAF4}
 	EndGlobalSection
 EndGlobal
