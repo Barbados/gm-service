@@ -11,5 +11,6 @@ services.ConfigureTelegramBot(configuration);
 services.ConfigureScheduler(configuration);
 
 var host = builder.Build();
+host.InitializeDatabase();
 
 await host.RunAsync();

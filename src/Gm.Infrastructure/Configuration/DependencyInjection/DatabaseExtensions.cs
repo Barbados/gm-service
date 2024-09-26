@@ -4,6 +4,7 @@ using Gm.Infrastructure.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace Gm.Infrastructure.Configuration.DependencyInjection;
 
@@ -23,5 +24,11 @@ public static class DatabaseExtensions
         services.AddScoped(typeof(IReadRepository<>), typeof(EfRepository<>));
 
         return services;
+    }
+
+    public static void InitializeDatabase(this IHost app)
+    {
+        using var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
+        serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>().Database.Migrate();
     }
 }
