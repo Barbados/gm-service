@@ -21,7 +21,7 @@ public class SenderService(ITelegramBotClient botClient) : ISenderService
 
     private static string ComposeGmMessage()
     {
-        var culture = CultureInfo.CreateSpecificCulture("ru-RU");
+        var culture = new CultureInfo("ru-RU");
         var message = string.Create(culture, $"Доброе утро!\nСегодня {DateTime.Today:dddd}, {DateTime.Today:dd-MM-yyyy}.");
         message += $"\nХорошего дня! Увидимся завтра.";
 
