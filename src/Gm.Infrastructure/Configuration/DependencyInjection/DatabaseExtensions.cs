@@ -36,10 +36,6 @@ public static class DatabaseExtensions
         using var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
         var databaseFacade = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>().Database;
         
-        using var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
-        var logger = loggerFactory.CreateLogger("Gm");
-        logger.LogInformation($"Inint db - Connection string: {databaseFacade}");
-        
         databaseFacade.Migrate();
     }
 }
