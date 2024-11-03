@@ -43,7 +43,7 @@ services:
 #      - gm-network
 networks:
   gm-network:
-    name: pgcontainer_gm-network
+    name: pg-container_gm-network
     external: true
 #volumes:
 #  db_data:
