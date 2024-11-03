@@ -20,8 +20,8 @@ public class SenderService(ITelegramBotClient botClient) : ISenderService
 
     private static string ComposeGmMessage()
     {
-        var message = $"Hello!\nToday is {DateTime.Today:dddd}, {DateTime.Today:dd-MM-yyyy}.";
-        message += $"\nHave a nice day! See you tomorrow.";
+        var message = $"Доброе утро!\nСегодня {DateTime.Today:dddd}, {DateTime.Today:dd-MM-yyyy}.";
+        message += $"\nХорошего дня! Увидимся завтра.";
 
         return message;
     }
