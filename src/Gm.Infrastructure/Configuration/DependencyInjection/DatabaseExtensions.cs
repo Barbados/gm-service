@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace Gm.Infrastructure.Configuration.DependencyInjection;
 
@@ -12,7 +13,11 @@ public static class DatabaseExtensions
 {
     public static IServiceCollection ConfigureDatabase(this IServiceCollection services, IConfiguration configuration)
     {
+        using var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+        var logger = loggerFactory.CreateLogger("Gm");
+        
         var connectionString = configuration.GetConnectionString("GmDb");
+        logger.LogInformation($"Connection string: {connectionString}");
 
         services.AddDbContext<ApplicationDbContext>(options =>
         {
@@ -29,6 +34,12 @@ public static class DatabaseExtensions
     public static void InitializeDatabase(this IHost app)
     {
         using var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
-        serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>().Database.Migrate();
+        var databaseFacade = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>().Database;
+        
+        using var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+        var logger = loggerFactory.CreateLogger("Gm");
+        logger.LogInformation($"Inint db - Connection string: {databaseFacade}");
+        
+        databaseFacade.Migrate();
     }
 }
