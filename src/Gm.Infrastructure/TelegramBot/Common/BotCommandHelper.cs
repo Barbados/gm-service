@@ -12,22 +12,22 @@ public abstract class BotCommandHelper
             new()
             {
                 Command = BotCommandType.Start,
-                Description = "to start conversation"
+                Description = "начать общение"
             },
             new()
             {
                 Command = BotCommandType.Subscribe,
-                Description = "to subscribe on getting GM"
+                Description = "подписаться"
             },
             new()
             {
                 Command = BotCommandType.Unsubscribe,
-                Description = "to unsubscribe from getting GM"
+                Description = "отписаться"
             },
             new()
             {
                 Command = BotCommandType.Test,
-                Description = "to test getting GM message"
+                Description = "отправить тестовое сообщение"
             }
         };
     }
