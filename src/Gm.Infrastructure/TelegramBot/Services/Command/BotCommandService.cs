@@ -21,24 +21,33 @@ public class BotCommandService(
 {
     public async Task HandleAsync(Message message)
     {
-        if (message.Text is not { } messageText)
-            return;
-
-        var command = ExtractCommand(messageText);
-        BotCommandType.TryFromValue(command, out var commandType);
-        var chatId = message.Chat.Id;
-        // Handle command selected
-        if (commandType is not null)
+        try
         {
-            var sentMessage = await (commandType.Name switch
+            if (message.Text is not { } messageText)
+                return;
+
+            var command = ExtractCommand(messageText);
+            BotCommandType.TryFromValue(command, out var commandType);
+            var chatId = message.Chat.Id;
+            // Handle command selected
+            if (commandType is not null)
             {
-                nameof(BotCommandType.Start) => StartConversation(message),
-                nameof(BotCommandType.Subscribe) => Subscribe(message),
-                nameof(BotCommandType.Unsubscribe) => Unsubscribe(message),
-                nameof(BotCommandType.Test) => Test(message),
-                _ => Usage(message)
-            });
-            logger.LogInformation($"The message was sent with id: {sentMessage.MessageId}");
+                var sentMessage = await (commandType.Name switch
+                {
+                    nameof(BotCommandType.Start) => StartConversation(message),
+                    nameof(BotCommandType.Subscribe) => Subscribe(message),
+                    nameof(BotCommandType.Unsubscribe) => Unsubscribe(message),
+                    nameof(BotCommandType.Test) => Test(message),
+                    _ => Usage(message)
+                });
+                logger.LogInformation($"The message was sent with id: {sentMessage.MessageId}");
+            }
+
+        }
+        catch (Exception e)
+        {
+            logger.LogError($"An error occured while handling the message: {e.Message}");
+            throw;
         }
     }
 
