@@ -31,4 +31,16 @@ public abstract class BotCommandHelper
             }
         };
     }
+
+    public static IEnumerable<BotCommand> GetAdminCommands()
+    {
+        return new List<BotCommand>
+        {
+            new()
+            {
+                Command = BotCommandType.AddPost,
+                Description = "add text for new post"
+            }
+        };
+    }
 }
