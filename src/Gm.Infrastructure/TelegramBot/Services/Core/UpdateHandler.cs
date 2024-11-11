@@ -8,6 +8,7 @@ using Telegram.Bot.Types;
 namespace Gm.Infrastructure.TelegramBot.Services.Core;
 
 public class UpdateHandler(IBotCommandService commandService,
+    IBotConversationService conversationService,
     ILogger<UpdateHandler> logger) : IUpdateHandler
 {
     public async Task HandleErrorAsync(ITelegramBotClient bot, Exception exception, HandleErrorSource source,
@@ -33,6 +34,9 @@ public class UpdateHandler(IBotCommandService commandService,
     {
         // Handle command selected
         await commandService.HandleAsync(message);
+        
+        // Handle conversation in case if any command initiates it
+        await conversationService.HandleAsync(message);
     }
     
     private Task UnknownUpdateHandlerAsync(Update update)

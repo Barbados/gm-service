@@ -1,5 +1,6 @@
 ﻿using Gm.Infrastructure.TelegramBot;
 using Gm.Infrastructure.TelegramBot.Abstract;
+using Gm.Infrastructure.TelegramBot.Common;
 using Gm.Infrastructure.TelegramBot.Services.Command;
 using Gm.Infrastructure.TelegramBot.Services.Core;
 using Infrastructure.Configuration;
@@ -32,6 +33,8 @@ public static class TelegramBotExtensions
         services.AddScoped<IUpdateHandler, UpdateHandler>();
         services.AddScoped<IReceiverService, ReceiverService>();
         services.AddScoped<IBotCommandService, BotCommandService>();
+        services.AddScoped<IConversationHelper, ConversationHelper>();
+        services.AddScoped<IBotConversationService, BotConversationService>();
 
         services.AddHostedService<PollingService>();
     }

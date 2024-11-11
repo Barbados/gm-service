@@ -1,4 +1,5 @@
-﻿using Gm.Application.UseCases.Subscribers.Commands;
+﻿using Gm.Application.UseCases.Posts.Commands;
+using Gm.Application.UseCases.Subscribers.Commands;
 using Gm.Application.UseCases.Subscribers.Queries;
 using Gm.Application.UseCases.Subscriptions.Commands;
 using Gm.Domain.Aggregates.SubscriptionAggregate;
@@ -15,6 +16,7 @@ namespace Gm.Infrastructure.TelegramBot.Services.Command;
 
 public class BotCommandService(
     ISenderService senderService,
+    IConversationHelper conversationHelper,
     ITelegramBotClient botClient,
     IMediator mediator,
     ILogger<BotCommandService> logger) : IBotCommandService
@@ -32,12 +34,14 @@ public class BotCommandService(
             // Handle command selected
             if (commandType is not null)
             {
+                conversationHelper.SetCurrentCommand(chatId, commandType);   
                 var sentMessage = await (commandType.Name switch
                 {
                     nameof(BotCommandType.Start) => StartConversation(message),
                     nameof(BotCommandType.Subscribe) => Subscribe(message),
                     nameof(BotCommandType.Unsubscribe) => Unsubscribe(message),
                     nameof(BotCommandType.Test) => Test(message),
+                    nameof(BotCommandType.AddPost) => CreateFuturePost(message),
                     _ => Usage(message)
                 });
                 logger.LogInformation($"The message was sent with id: {sentMessage.MessageId}");
@@ -99,6 +103,13 @@ public class BotCommandService(
             usage,
             parseMode: ParseMode.Html,
             replyMarkup: new ReplyKeyboardRemove());
+    }
+
+    private async Task<Message> CreateFuturePost(Message message)
+    {
+        //await mediator.Send(new CreatePostCommand(DateOnly.FromDateTime(DateTime.Today.AddDays(1)), message.Text));
+        
+        return await botClient.SendTextMessageAsync(message.Chat, text: $"You just created a new post for tomorrow.");
     }
 
     private async Task<Message> SendText(Message msg)

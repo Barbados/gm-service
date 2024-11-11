@@ -24,7 +24,7 @@ public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<Applicati
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile(ConfigurationFileName)
             .Build();
-        
+
         return configuration.GetConnectionString("GmDb");
     }
 }
