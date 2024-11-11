@@ -45,8 +45,6 @@ public class BotCommandService(
                     _ => Usage(message)
                 });
                 logger.LogInformation($"The message was sent with id: {sentMessage.MessageId}");
-                logger.LogInformation($"The chat was sent with id: {chatId}");
-                logger.LogInformation($"The message was sent from user with id: {message.From?.Id}");
             }
 
         }
