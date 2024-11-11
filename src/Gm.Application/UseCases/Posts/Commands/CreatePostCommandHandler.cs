@@ -16,6 +16,10 @@ public class CreatePostCommandHandler(IRepository<Post> repository, ILogger<Crea
             Text = request.Text
         };
         
-        return await repository.AddAsync(newPost, cancellationToken);
+        logger.LogInformation("Creating a new post has started");
+        var result = await repository.AddAsync(newPost, cancellationToken);
+        logger.LogInformation($"Creating a new post has finished. Post id: {result.Id}");
+        
+        return result;
     }
 }

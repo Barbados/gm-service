@@ -22,6 +22,27 @@ namespace Gm.Infrastructure.Data.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Gm.Domain.Aggregates.PostAggregate.Post", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateOnly>("SendDate")
+                        .HasColumnType("date")
+                        .HasColumnName("send_date");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("text")
+                        .HasColumnName("text");
+
+                    b.HasKey("Id")
+                        .HasName("pk_posts");
+
+                    b.ToTable("posts", (string)null);
+                });
+
             modelBuilder.Entity("Gm.Domain.Aggregates.SubscriberAggregate.Subscriber", b =>
                 {
                     b.Property<Guid>("Id")

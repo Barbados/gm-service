@@ -107,9 +107,7 @@ public class BotCommandService(
 
     private async Task<Message> CreateFuturePost(Message message)
     {
-        //await mediator.Send(new CreatePostCommand(DateOnly.FromDateTime(DateTime.Today.AddDays(1)), message.Text));
-        
-        return await botClient.SendTextMessageAsync(message.Chat, text: $"You just created a new post for tomorrow.");
+        return await botClient.SendTextMessageAsync(message.Chat, text: "Enter message for tomorrow's post:");
     }
 
     private async Task<Message> SendText(Message msg)

@@ -1,10 +1,11 @@
-﻿using Gm.Infrastructure.TelegramBot.Abstract;
+﻿using Gm.Application.UseCases.Posts.Commands;
+using Gm.Infrastructure.TelegramBot.Abstract;
 using Gm.Infrastructure.TelegramBot.Model;
 using MediatR;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
-namespace Gm.Infrastructure.TelegramBot.Common;
+namespace Gm.Infrastructure.TelegramBot.Services.Command;
 
 public class BotConversationService(
     ITelegramBotClient botClient,
@@ -28,14 +29,17 @@ public class BotConversationService(
     private async Task HandleAddPostConversation(Message message)
     {
         var currentConversation = conversationHelper.GetCurrentConversation(message.Chat.Id);
-        if (currentConversation.ConversationCounter >= 3)
+        switch (currentConversation.ConversationCounter)
         {
-            currentConversation.ConversationCounter = 0;
-            currentConversation.CurrentCommand = BotCommandType.None;
-            return;
+            case 0:
+                currentConversation.ConversationCounter++;
+                break;
+            case 1:
+                await mediator.Send(new CreatePostCommand(DateOnly.FromDateTime(DateTime.Today).AddDays(1), message.Text));
+                await botClient.SendTextMessageAsync(message.Chat, $"You've just added a message to post tomorrow.");
+                currentConversation.CurrentCommand = BotCommandType.None;
+                currentConversation.ConversationCounter = 0;
+                return;
         }
-
-        // Create a new user as a patient
-        await botClient.SendTextMessageAsync(message.Chat, $"You posted: '{message.Text}'. Go on!");
     }
 }
