@@ -12,7 +12,7 @@ services.ConfigureTelegramBot(configuration);
 services.ConfigureScheduler(configuration);
 
 var host = builder.Build();
-//host.InitializeDatabase();
+host.InitializeDatabase();
 
 // TestDateCultureAsync();
 
