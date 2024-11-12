@@ -14,6 +14,8 @@ services:
       context: .
       dockerfile: src/Gm.TgDaemon/Dockerfile
       target: final
+    volumes:
+      - gm-app:/home/docker/gm-app/data
     ports:
       - 8080:8080
     networks: 
