@@ -65,6 +65,7 @@ public class BotCommandService(
 
     private async Task<Message> StartConversation(Message message)
     {
+        logger.LogInformation($"Starting conversation with message: {message.Text}");
         return await botClient.SendTextMessageAsync(message.Chat.Id,
             $"Hello Dear {message.From!.Username}! Welcome to GM bot!");
     }

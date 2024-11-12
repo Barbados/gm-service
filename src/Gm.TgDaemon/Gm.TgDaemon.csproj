@@ -7,6 +7,7 @@
         <Nullable>enable</Nullable>
         <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
         <RootNamespace>Gm.Daemon</RootNamespace>
+        <UserSecretsId>f297f624-113d-4b95-9ee4-a102985fd520</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
