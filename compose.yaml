@@ -47,6 +47,8 @@ networks:
   gm-network:
     name: pg-container_gm-network
     external: true
+volumes:
+  myapp:
 #volumes:
 #  db_data:
 
