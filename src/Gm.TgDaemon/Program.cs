@@ -13,6 +13,7 @@ services.ConfigureTelegramBot(configuration);
 services.ConfigureScheduler(configuration);
 
 var host = builder.Build();
-host.InitializeDatabase();
+if (!builder.Environment.IsDevelopment())
+    host.InitializeDatabase();
 
 await host.RunAsync();
