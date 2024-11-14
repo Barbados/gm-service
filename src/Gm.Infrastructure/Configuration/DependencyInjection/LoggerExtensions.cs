@@ -18,6 +18,7 @@ public static class LoggerExtensions
                 rollingInterval: RollingInterval.Infinite,
                 outputTemplate: outputTemplate)
             .CreateLogger();
+        Log.Logger.Information($"Logs directory: {logsDirectory}");
 
         services.AddSerilog();
 
