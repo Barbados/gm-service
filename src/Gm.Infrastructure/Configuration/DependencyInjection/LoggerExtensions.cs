@@ -8,7 +8,7 @@ public static class LoggerExtensions
 {
     public static IServiceCollection ConfigureLogging(this IServiceCollection services, IConfiguration configuration)
     {
-        var logsDirectory = configuration["Logging:LogsDirectory"] ?? string.Empty;
+        var logsDirectory = configuration["Log:LogDirectoryPath"] ?? string.Empty;
         const string outputTemplate = "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff} [{Level}] {Message}{NewLine}{Exception}";
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Verbose()
