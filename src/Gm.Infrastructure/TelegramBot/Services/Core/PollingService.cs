@@ -1,9 +1,10 @@
 ﻿using Gm.Infrastructure.TelegramBot.Abstract;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace Gm.Infrastructure.TelegramBot.Services.Core;
 
-public class PollingService(IReceiverService receiverService) : BackgroundService
+public class PollingService(IServiceProvider serviceProvider) : BackgroundService
 {
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
@@ -19,6 +20,9 @@ public class PollingService(IReceiverService receiverService) : BackgroundServic
         {
             try
             {
+                using var scope = serviceProvider.CreateScope();
+                var receiverService = scope.ServiceProvider.GetRequiredService<IReceiverService>();
+
                 await receiverService.ReceiveAsync(token);
             }
             catch (Exception e)

@@ -29,12 +29,12 @@ public static class TelegramBotExtensions
                 return new TelegramBotClient(botOptions, httpClient);
             });
 
-        services.AddTransient<ISenderService, SenderService>();
-        services.AddTransient<IUpdateHandler, UpdateHandler>();
-        services.AddTransient<IReceiverService, ReceiverService>();
-        services.AddTransient<IBotCommandService, BotCommandService>();
-        services.AddTransient<IConversationHelper, ConversationHelper>();
-        services.AddTransient<IBotConversationService, BotConversationService>();
+        services.AddScoped<ISenderService, SenderService>();
+        services.AddScoped<IUpdateHandler, UpdateHandler>();
+        services.AddScoped<IReceiverService, ReceiverService>();
+        services.AddScoped<IBotCommandService, BotCommandService>();
+        services.AddScoped<IConversationHelper, ConversationHelper>();
+        services.AddScoped<IBotConversationService, BotConversationService>();
 
         services.AddHostedService<PollingService>();
     }
