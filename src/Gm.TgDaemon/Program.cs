@@ -5,7 +5,7 @@ var builder = Host.CreateApplicationBuilder();
 var services = builder.Services;
 var configuration = builder.Configuration;
 
-services.ConfigureLogging();
+services.ConfigureLogging(configuration);
 
 services.ConfigureDatabase(configuration);
 services.ConfigureMediatr();
