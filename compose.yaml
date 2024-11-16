@@ -15,7 +15,7 @@ services:
       dockerfile: src/Gm.TgDaemon/Dockerfile
       target: final
     volumes:
-      - gm-service-data:/etc/data
+      - ./gm-data:/var/lib/gm-service/data
     ports:
       - 8080:8080
     networks: 
@@ -47,8 +47,8 @@ networks:
   gm-network:
     name: pg-container_gm-network
     external: true
-volumes:
-  gm-service-data:
+#volumes:
+  #gm-data:
 #volumes:
 #  db_data:
 
