@@ -14,11 +14,10 @@ public static class LoggerExtensions
             .MinimumLevel.Verbose()
             .WriteTo.Console(
                 outputTemplate: outputTemplate)
-            .WriteTo.File(Path.Combine(logsDirectory, "logs", $"{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}", "Log.txt"),
+            .WriteTo.File(Path.Combine(logsDirectory, $"log_{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}.txt"),
                 rollingInterval: RollingInterval.Infinite,
                 outputTemplate: outputTemplate)
             .CreateLogger();
-        Log.Logger.Information($"Logs directory: {logsDirectory}");
 
         services.AddSerilog();
 

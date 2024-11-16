@@ -15,11 +15,13 @@ services:
       dockerfile: src/Gm.TgDaemon/Dockerfile
       target: final
     volumes:
-      - ./gm-data:/var/lib/gm-service/data
+      - gm-data:/app/logs
     ports:
       - 8080:8080
     networks: 
       - gm-network
+volumes:
+  gm-data:
 #    depends_on:
 #      postgres-db:
 #        condition: service_healthy
@@ -47,8 +49,6 @@ networks:
   gm-network:
     name: pg-container_gm-network
     external: true
-#volumes:
-  #gm-data:
 #volumes:
 #  db_data:
 
