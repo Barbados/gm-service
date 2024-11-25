@@ -12,11 +12,10 @@ public static class LoggerExtensions
         const string outputTemplate = "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff} [{Level}] {Message}{NewLine}{Exception}";
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Verbose()
-            .WriteTo.Console(
-                outputTemplate: outputTemplate)
-            .WriteTo.File(Path.Combine(logsDirectory, $"log_{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}.txt"),
+            .WriteTo.Console(outputTemplate: outputTemplate)
+            /*.WriteTo.File(Path.Combine(logsDirectory, $"log_{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}.txt"),
                 rollingInterval: RollingInterval.Infinite,
-                outputTemplate: outputTemplate)
+                outputTemplate: outputTemplate)*/
             .CreateLogger();
 
         services.AddSerilog();
