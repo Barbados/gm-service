@@ -14,6 +14,14 @@ using Telegram.Bot.Types.ReplyMarkups;
 
 namespace Gm.Infrastructure.TelegramBot.Services.Command;
 
+/// <summary>
+/// This service for handling commands sent to the Bot
+/// </summary>
+/// <param name="senderService"></param>
+/// <param name="conversationHelper"></param>
+/// <param name="botClient"></param>
+/// <param name="mediator"></param>
+/// <param name="logger"></param>
 public class BotCommandService(
     ISenderService senderService,
     IConversationHelper conversationHelper,
