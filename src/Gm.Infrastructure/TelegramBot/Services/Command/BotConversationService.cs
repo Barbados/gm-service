@@ -7,6 +7,12 @@ using Telegram.Bot.Types;
 
 namespace Gm.Infrastructure.TelegramBot.Services.Command;
 
+/// <summary>
+/// This service handles commands that initiates a conversation
+/// </summary>
+/// <param name="botClient"></param>
+/// <param name="mediator"></param>
+/// <param name="conversationHelper"></param>
 public class BotConversationService(
     ITelegramBotClient botClient,
     IMediator mediator, 
