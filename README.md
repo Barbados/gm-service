@@ -1,5 +1,8 @@
 # GM Service
 
+
+[![build status](https://github.com/Barbados/gm-service/actions/workflows/CI.yml/badge.svg)](https://github.com/Barbados/gm-service/actions/workflows/CI.yml)
+
 ## Overview
 
 GM Service is a project dedicated to serve simple Telegram bot that sends custom 'Good Morning' messages.
