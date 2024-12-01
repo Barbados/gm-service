@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Configuration;
+﻿namespace Gm.Infrastructure.Configuration;
 
 public class BotSettings
 {

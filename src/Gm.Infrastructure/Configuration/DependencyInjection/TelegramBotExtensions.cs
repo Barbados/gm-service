@@ -3,7 +3,6 @@ using Gm.Infrastructure.TelegramBot.Abstract;
 using Gm.Infrastructure.TelegramBot.Common;
 using Gm.Infrastructure.TelegramBot.Services.Command;
 using Gm.Infrastructure.TelegramBot.Services.Core;
-using Infrastructure.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Telegram.Bot;
